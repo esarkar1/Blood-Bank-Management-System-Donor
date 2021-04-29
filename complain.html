@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+ <head>  
+
+           <title>complain</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+               <?php include 'header.php' ?>  
+   
+ 
+        <fieldset>
+    <legend align="center" style="font-size: 2.0em">Complain</legend>
+           <div class="container">  
+                 
+
+    <level>complain</level>
+    <input type="text"id="complain"name="complain">
+    <br>
+    
+        <button id="submit" onclick="submit()">Submit</button>
+     <p id="p1"></p>
+
+</fieldset>
+<script>
+function submit() {
+
+            var complain = document.getElementById("complain").value;
+            
+
+            if(complain == "" ) {
+                document.getElementById("p1").innerHTML = "Fill up the form properly";
+                document.getElementById("p1").style.color = "red";
+            }
+
+            else {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        document.getElementById("p1").innerHTML = xhttp.responseText;
+                        document.getElementById("p1").style.color = "green";
+                    }
+                }
+
+                xhttp.open("POST", "ComplainAction.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("complain="+complain+");
+            }
+        }
+
+        </script>
+</div>
+</body>
+</html>
+
